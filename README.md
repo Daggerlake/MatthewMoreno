@@ -1,3 +1,6 @@
+# Live Version
+The live version of the app can be accessed [here]( https://glacial-beach-72033.herokuapp.com/).
+
 # Notes
 
 Received two deprecation warnings on running `npm install`.
