@@ -1,7 +1,8 @@
-# Live Version
+# Chapter 3
+## Live Version
 The live version of the app can be accessed [here]( https://glacial-beach-72033.herokuapp.com/).
 
-# Notes
+## Notes
 
 Received two deprecation warnings on running `npm install`.
 * jade@1.11.0: Jade has been renamed to pug, please install the latest version of pug instead of jade
