@@ -18,7 +18,7 @@ I replaced that line with the line below.
 script(src='../node_modules/jquery/dist/jquery.min.js')
 ```
 
-UPDATE: Based on feedback received from Professor Mullen that jQuery was not accessible via node_modules, I switched over to using Bower to manage front-end javascript dependencies. The layout.jade file has been updated to reference .
+**UPDATE:** Based on feedback received from Professor Mullen that jQuery was not accessible via node_modules, I switched over to using Bower to manage front-end javascript dependencies. The layout.jade file has been updated to reference .
 ```jade
 script(src='/bower_components/jquery/dist/jquery.min.js')
 ```
