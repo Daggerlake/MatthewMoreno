@@ -17,3 +17,13 @@ I replaced that line with the line below.
 ```jade
 script(src='../node_modules/jquery/dist/jquery.min.js')
 ```
+
+UPDATE: Based on feedback received from Professor Mullen that jQuery was not accessible via node_modules, I switched over to using Bower to manage front-end javascript dependencies. The layout.jade file has been updated to reference .
+```jade
+script(src='/bower_components/jquery/dist/jquery.min.js')
+```
+To make this work with the Express middleman, I had to update the Express configuration in app.js, adding the following line.
+```javascript
+app.use('/bower_components',  express.static(path.join(__dirname , 'bower_components')));
+```
+This should configure the Express middleman to serve up dependencies that reside in the `bower_components` folder, referenced beginning with `/bower_components` as static files.
