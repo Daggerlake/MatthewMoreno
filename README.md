@@ -3,7 +3,8 @@
 The live version of the app can be accessed [here]( https://glacial-beach-72033.herokuapp.com/).
 
 ##Notes
-
+* There is a typo in the tile of Listing 4.7 in *Getting MEAN*. The listing should refer to `app_server/views/location-info.jade` instead of `app_server/views/location-info.js`.
+* As mentioned in Professor Mullen's notes for Chapter 4, Google Maps requires an API key to generate a static image to embed in the page.
 
 
 
