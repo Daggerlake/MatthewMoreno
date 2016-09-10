@@ -1,0 +1,23 @@
+extends layout
+
+block content
+
+  // Page header that fills entire width, containing a column that limits text
+  // width to six columns on large screens for readability
+  #banner.page-header
+    .row
+      .col-lg-6
+        h1 Loc8r
+          small &nbsp;Find places to work with wifi near you
+
+  .row
+    // Container for list of locations, spanning all twelve columns on
+    // extra-small devices and eight columns on small devices and larger
+    .col-xs-12.col-sm-8
+      p List area.
+
+    // Container for secondary or sidebar information, spanning all twelve
+    // columns on extra-small devices and four columns on small devices and
+    // larger
+    .col-xs-12.col-sm-4
+      p.lead Loc8r helps you find places to work when out and about.
