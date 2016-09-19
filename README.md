@@ -7,6 +7,7 @@ The live version of the app can be accessed [here]( https://glacial-beach-72033.
 * As mentioned in Professor Mullen's notes for Chapter 4, Google Maps requires an API key to generate a static image to embed in the page.
 * The coordinates for the example location were changed to 47.263599, -122.483337 to reflect the location of Oppenheimer cafe.
 * Review from Charlie Chaplin -> review from The Grizz
+* Listing 4.8 gives an incorrect path `app_server/views/location-review.form.js`; the correct path for Listing 4.8 is `app_server/views/location-review-form.jade`.
 
 
 
