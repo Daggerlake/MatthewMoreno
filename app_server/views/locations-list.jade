@@ -1,0 +1,46 @@
+extends layout
+
+block content
+
+  // Page header that fills entire width, containing a column that limits text
+  // width to six columns on large screens for readability
+  #banner.page-header
+    .row
+      .col-lg-6
+        h1 Loc8r
+          small &nbsp;Find places to work with wifi near you
+
+  .row
+    // Container for list of locations, spanning all twelve columns on
+    // extra-small devices and eight columns on small devices and larger
+    .col-xs-12.col-sm-8
+      // Set up a Bootstrap list group and create a single item spanning full
+      // twelve columns
+      .row.list_group
+        .col-xs-12.list_group_item
+          h4
+            a(href="/location") Oppenheimer Cafe
+            small &nbsp;
+              // Location rating
+              span.glyphicon.glyphicon-star
+              span.glyphicon.glyphicon-star
+              span.glyphicon.glyphicon-star
+              span.glyphicon.glyphicon-star-empty
+              span.glyphicon.glyphicon-star-empty
+            // Distance to location
+            span.badge.pull-right.badge-default 100m
+          // Address of locaiton
+          p.address 125 High Street, Reading, RG6 1PS
+          p
+            // Location facilities
+            span.label.label-warning Hot drinks
+            &nbsp;
+            span.label.label-warning Food
+            &nbsp;
+            span.label.label-warning Premium wifi
+            &nbsp;
+    // Container for secondary or sidebar information, spanning all twelve
+    // columns on extra-small devices and four columns on small devices and
+    // larger
+    .col-xs-12.col-sm-4
+      p.lead Loc8r helps you find places to work when out and about.
