@@ -1,6 +1,7 @@
 # Chapter 4
 ## Live version
-The live version of the app can be accessed [here]( https://glacial-beach-72033.herokuapp.com/).
+The live version of the app can be accessed [here]( https://glacial-beach-72033.herokuapp.com/). Below is a screenshot of the project in the wild.
+![Chapter 4 screenshot](/public/images/chapter_4_screenshot.png)
 
 ## Notes
 * There is a typo in the tile of Listing 4.7 in *Getting MEAN*. The listing should refer to `app_server/views/location-info.jade` instead of `app_server/views/location-info.js`.
