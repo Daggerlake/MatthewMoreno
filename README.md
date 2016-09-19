@@ -8,7 +8,8 @@ The live version of the app can be accessed [here]( https://glacial-beach-72033.
 * The coordinates for the example location were changed to 47.263599, -122.483337 to reflect the location of Oppenheimer cafe.
 * Review from Charlie Chaplin -> review from The Grizz
 * Listing 4.8 gives an incorrect path `app_server/views/location-review.form.js`; the correct path for Listing 4.8 is `app_server/views/location-review-form.jade`.
-
+* Added additional Lorem ipsum from [lipsum.com](http://lipsum.com)
+* Widened about page text block (`.col-md-6` -> `.col-md-10`)
 
 
 # Chapter 3
