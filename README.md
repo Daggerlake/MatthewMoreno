@@ -21,9 +21,9 @@ The live version of the app can be accessed [here]( https://glacial-beach-72033.
     * **lat**: 47.257505
     * **long**: -122.442026
   * Seattle Public Library
-    **lat**: 47.606889
-    **long**: -122.332533
-    
+    * **lat**: 47.606889
+    * **long**: -122.332533
+
 # Chapter 4
 ## Live version
 The live version of the app can be accessed [here]( https://glacial-beach-72033.herokuapp.com/). Below is a screenshot of the project in the wild.
