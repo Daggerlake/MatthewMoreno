@@ -75,5 +75,8 @@ module.exports.locationInfo = function(req, res) {
 
 /* GET 'Add review' page */
 module.exports.addReview = function(req, res) {
-  res.render('location-review-form', { title: 'Add review' });
+  res.render('location-review-form', {
+     title: 'Review Oppenheimer Cafe on Loc8r',
+     pageHeader: { title: 'Review Oppenheimer Cafe'} 
+   });
 };
