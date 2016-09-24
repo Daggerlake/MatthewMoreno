@@ -4,6 +4,25 @@ The live version of the app can be accessed [here]( https://glacial-beach-72033.
 ![Chapter 5 screenshot](/public/images/chapter_5_screenshot.png)
 
 ## Notes
+* Used the following locations in the database.
+  * Oppenheimer Cafe
+    * **lat**: 47.263599
+    * **long**: -122.483337
+  * Diversions Cafe
+    * **lat**: 47.263475
+    * **long**: -122.479086
+  * Metropolitan Market
+    * **lat**: 47.269738
+    * **long**: -122.489818
+  * Tully's Coffee
+    * **lat**: 47.255685
+    * **long**: -122.440836
+  * B Sharp Coffee House
+    * **lat**: 47.257505
+    * **long**: -122.442026
+  * Seattle Public Library
+    **lat**: 47.606889
+    **long**: -122.332533
     
 # Chapter 4
 ## Live version
