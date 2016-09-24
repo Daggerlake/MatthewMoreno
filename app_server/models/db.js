@@ -34,7 +34,7 @@ process.once('SIGUSR2', function () {
 // listen for SIGINT emitted on application termination
 process.on('SIGINT', function () {
   // send message to gracefulShutdown and callback to exit Node process
-  gracefulShotdown('app termination', function () {
+  gracefulShutdown('app termination', function () {
     process.exit(0);
   });
 });
@@ -42,7 +42,7 @@ process.on('SIGINT', function () {
 // listen for SIGTERM emitted when Heroku shuts down process
 process.on('SIGTERM', function () {
   // send message to gracefulShutdown and callback to exit Node process
-  gracefulShotdown('Heroku app shutdown', function () {
+  gracefulShutdown('Heroku app shutdown', function () {
     process.exit(0);
   });
 });
