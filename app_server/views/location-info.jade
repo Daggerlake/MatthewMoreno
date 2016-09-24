@@ -1,5 +1,9 @@
 extends layout
 
+// bring in sharedHTMLfunctions include
+// this contains outputRating mixin
+include _includes/sharedHTMLfunctions
+
 block content
   // page header
   .row.page-header
@@ -12,11 +16,8 @@ block content
         .col-xs-12.col-sm-6
           // location rating
           p.rating
-            span.glyphicon.glyphicon-star
-            span.glyphicon.glyphicon-star
-            span.glyphicon.glyphicon-star
-            span.glyphicon.glyphicon-star-empty
-            span.glyphicon.glyphicon-star-empty
+            // call mixin
+            +outputRating(location.rating)
           // location Address
           p 125 High Street, Reading, RG6 1PS
           // location hours
@@ -24,66 +25,54 @@ block content
             .panel-heading
               h2.panel-title Opening hours
             .panel-body
-              p Monday - Friday : 07:00 - 19:00
-              p Saturday : 08:00 - 17:00
-              p Sunday : closed
+              // loop through array of open times
+              each time in location.openingTimes
+                p
+                  // check if closed using if/else
+                  | #{time.days}: 
+                  if time.closed
+                    | Closed
+                  else
+                    | #{time.opening} - #{time.closing}
             // location amenities
           .panel.panel-primary
             .panel-heading
               h2.panel-title Facilities
             .panel-body
-              span.label.label-warning
-                span.glyphicon.glyphicon-ok
-                | &nbsp; Hot drinks
-              | &nbsp;
-              span.label.label-warning
-                span.glyphicon.glyphicon-ok
-                | &nbsp; Premium wifi
-              | &nbsp;
+              each facility in location.facilities
+                span.label.label-warning
+                  span.glyphicon.glyphicon-ok
+                  | &nbsp;#{facility}
+                | &nbsp;
         .col-xs-12.col-sm-6.location-map
           // location map
           .panel.panel-primary
             .panel-heading
               h2.panel-title Location map
             .panel-body
-              img.img-responsive.img-rounded(src='http://maps.googleapis.com/maps/api/staticmap?center=47.263599,-122.483337&zoom=17&size=400x350&sensor=false&markers=47.263599,-122.483337&scale=2&key=AIzaSyCFiXrSIlTnOfuRXfruvOLMUWUwxlbf51U')
+              img.img-responsive.img-rounded(src="http://maps.googleapis.com/maps/api/staticmap?center=#{location.coords.lat},#{location.coords.lng}&zoom=17&size=400x350&sensor=false&markers=#{location.coords.lat},#{location.coords.lng}&scale=2&key=AIzaSyCFiXrSIlTnOfuRXfruvOLMUWUwxlbf51U")
       .row
         .col-xs-12
-          // user reviews of locations
-          .panel.panel-priprimary.review-panel
+          .panel.panel-primary.review-panel
             .panel-heading
-              a.btn.btn-default.pull-right(href='/location/review/new') Add review
+              a.btn.btn-default.pull-right(href="/location/review/new") Add review
               h2.panel-title Customer reviews
             .panel-body.review-container
-              .row
-                .review
-                  .well.well-sm.review_header
-                    span.rating
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star
-                    span.reviewAuthor Simon Holmes
-                    span.reviewTimestamp 16 July 2013
-                  .col-xs-12
-                    p what a great place. I can't say enough good things about it.
-              .row
-                .review
-                  .well.well-sm.review_header
-                    span.rating
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star-empty
-                      span.glyphicon.glyphicon-star-empty
-                    span.reviewAuthor The Grizz
-                    span.reviewTimestamp 16 June 2013
-                  .col-xs-12
-                    p Meh. The coffee was expensive but hack, hack, chop, chop!
-    // Final responsive column for sidebar contextual information
+              // loop through each review
+              each review in location.reviews
+                .row
+                  .review
+                    .well.well-sm.review-header
+                      span.rating
+                        +outputRating(review.rating)
+                      span.author #{review.author}
+                      small.reviewTimestamp #{review.timestamp}
+                    .col-xs-12
+                      // replace line breaks in text with <br/> tag
+                      p !{(review.reviewText).replace(/\n/g, '<br/>')}
+    // final responsive column for sidebar contextual information
     .col-xs-12.col-md-3
-    p.lead Oppenheimer Cafe is on Loc8r because it has accessible wifi and space to sit down with your laptop and do some work.
-    p If you've been and you like it - or you don't - please leave a review to help other people just like you.
+    p.lead #{location.name} #{sidebar.context}
+    p= sidebar.callToAction
               
                 
