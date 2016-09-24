@@ -7,9 +7,10 @@ block content
   #banner.page-header
     .row
       .col-lg-6
-        h1 Loc8r
-          small &nbsp;Find places to work with wifi near you
-
+        // the = signifies that the content is buffered code
+        h1= pageHeader.title
+          small &nbsp;#{pageHeader.strapline}
+          // #{} delimiters are used to insert data into a specific place
   .row
     // Container for list of locations, spanning all twelve columns on
     // extra-small devices and eight columns on small devices and larger
