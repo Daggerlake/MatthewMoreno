@@ -1,3 +1,10 @@
+# Chapter 5
+## Live version
+The live version of the app can be accessed [here]( https://glacial-beach-72033.herokuapp.com/). Below is a screenshot of the project in the wild.
+![Chapter 5 screenshot](/public/images/chapter_5_screenshot.png)
+
+## Notes
+    
 # Chapter 4
 ## Live version
 The live version of the app can be accessed [here]( https://glacial-beach-72033.herokuapp.com/). Below is a screenshot of the project in the wild.
