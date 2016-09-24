@@ -4,7 +4,7 @@ The live version of the app can be accessed [here]( https://glacial-beach-72033.
 ![Chapter 5 screenshot](/public/images/chapter_5_screenshot.png)
 
 ## Notes
-* Used the following locations in the database.
+* I used the following locations in the database.
   * Oppenheimer Cafe
     * **lat**: 47.263599
     * **long**: -122.483337
