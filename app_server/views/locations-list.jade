@@ -1,5 +1,7 @@
 extends layout
 
+include _includes/sharedHTMLfunctions
+
 block content
 
   // Page header that fills entire width, containing a column that limits text
@@ -23,12 +25,7 @@ block content
             h4
               a(href="/location")= location.name
               small &nbsp;
-                // Location rating
-                span.glyphicon.glyphicon-star
-                span.glyphicon.glyphicon-star
-                span.glyphicon.glyphicon-star
-                span.glyphicon.glyphicon-star-empty
-                span.glyphicon.glyphicon-star-empty
+                +outputRating(location.rating)
               // Distance to location
               span.badge.pull-right.badge-default= location.distance
             // Address of locaiton
