@@ -4,7 +4,7 @@ The live version of the app can be accessed [here]( https://glacial-beach-72033.
 ![Chapter 5 screenshot](/public/images/chapter_6_screenshot.png)
 
 ## Notes
-
+* The path in the title of Listing 6.1 is incorrect; the correct path should read `app_api/routes/index.js`.
 
 # Chapter 5
 ## Live version
