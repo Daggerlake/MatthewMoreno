@@ -7,11 +7,60 @@ var sendJsonResponse = function(res, status, content) {
 };
 
 module.exports.locationsListByDistance = function(req, res) {
-  sendJsonResponse(res, 200, {"status" : "success"});
+  // get coordinates from query string
+  // and convert strings into numbers
+  var lng = parseFloat(req.query.lng);
+  var lat = parseFloat(req.query.lat);
+  var dmax = parseFloat(req.query.dmax);
+  // create geoJSON point
+  var point = {
+    type: "Point",
+    coordinates: [lng, lat]
+  };
+
+  var geoOptions = {
+    spherical: true,
+    maxDistance: dmax,
+    num: 10
+  };
+
+  // check lng, lat, dmax query parameters exist in correct format
+  // otherwise, return 404 error
+  if (!lng || !lat) {
+    sendJsonResponse(res, 404, {
+      "message": "lng, lat, and dmax query parameters are required"
+    });
+    return;
+  }
+
+  Loc.geoNear(point, geoOptions, function (err, results, stats) {
+    // to hold processed data, will be returned
+    var locations = [];
+    // if geoNear query returns error, send as response with 404 status
+    if(err) {
+      sensJsonResponse(res, 404, err);
+    } else {
+
+      // process the data and then push it into the return object
+      results.forEach(function(doc) {
+        locations.push({
+          distance: doc.dis,
+          name: doc.obj.name,
+          address: doc.obj.address,
+          rating: doc.obj.rating,
+          facilities: doc.obj.facilities,
+          _id: doc.obj._id
+        });
+      });
+      sendJsonResponse(res, 200, locations);
+    }
+  });
 };
+
 module.exports.locationsCreate = function(req, res) {
   sendJsonResponse(res, 200, {"status" : "success"});
 };
+
 module.exports.locationsReadOne = function(req, res) {
   if(req.params && req.params.locationid) {
     Loc
