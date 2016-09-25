@@ -1,3 +1,11 @@
+# Chapter 6
+## Live version
+The live version of the app can be accessed [here]( https://glacial-beach-72033.herokuapp.com/). Below is a screenshot of the project in the wild.
+![Chapter 5 screenshot](/public/images/chapter_6_screenshot.png)
+
+## Notes
+
+
 # Chapter 5
 ## Live version
 The live version of the app can be accessed [here]( https://glacial-beach-72033.herokuapp.com/). Below is a screenshot of the project in the wild and the mLab database documents view.
