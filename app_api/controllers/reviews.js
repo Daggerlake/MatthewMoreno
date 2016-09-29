@@ -6,7 +6,97 @@ var sendJsonResponse = function(res, status, content) {  res.status(status);
 };
 
 module.exports.reviewsCreate = function(req, res) {
-  sendJsonResponse(res, 200, {"status" : "success"});
+  var locationid = req.params.locationid;
+  if (locationid) {
+    Loc
+      .findById(locationid)
+      .select('reviews')
+      .exec(
+        function(err, location) {
+          if (err) {
+            sendJsonResponse(res, 400, err);
+          } else {
+            // successful find operation calls new
+            // function to add review, passing request,
+            // response, and location objects
+            doAddReview(req, res, location);
+          }
+        }
+      );
+  } else {
+      sendJsonResponse(res, 404, {
+        "message": "Not found, locationid required"
+      });
+      console.log("reviewsCreate locationid not provided");
+  }
+};
+
+var doAddReview = function(req, res, location) {
+  //
+  if (!location) {
+    sendJsonResponse(res, 404, {
+      "message": "locationid not found"
+    });
+    console.log("doAddReview locationid not found");
+  } else {
+    // push new data into the subdocument array...
+    location.reviews.push({
+      author: req.body.author,
+      rating: req.body.rating,
+      reviewText: req.body.reviewText
+    });
+    // save it
+    location.save(function(err, location) {
+      var thisReview;
+      if (err) {
+        sendJsonResponse(res, 4000, err);
+      } else {
+        // on successful save operation, call function to update average rating
+        updateAverageRating(location._id);
+        // retrieve last review added to array and return it as JSON
+        // confirmation response
+        thisReview = location.reviews[location.reviews.length - 1];
+        sendJsonResponse(res, 201, thisReview);
+      }
+    });
+  }
+};
+
+var updateAverageRating = function(locationid) {
+  // Find correct document given supplied ID
+  Loc
+    .findById(locationid)
+    .select('rating reviews')
+    .exec(
+      function(err, location) {
+        if (!err) {
+          doSetAverageRating(location);
+        }
+      });
+};
+
+var doSetAverageRating = function(location) {
+  var i, reviewCount, ratingAverage, ratingTotal;
+  if (location.reviews && location.reviews.length > 0) {
+    reviewCount = location.reviews.length;
+    ratingTotal = 0;
+    // loop through review subdocuments adding up ratings
+    for (i = 0; i < reviewCount; i ++) {
+      ratingTotal = ratingTotal + location.reviews[i].rating;
+    }
+    // calculating average rating value
+    ratingAverage = parseInt(ratingTotal / reviewCount, 10);
+    // updating rating value of parent document
+    location.rating = ratingAverage;
+    // save parent document
+    location.save(function(err) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Average rating updated to", ratingAverage);
+      }
+    });
+  }
 };
 
 module.exports.reviewsReadOne = function(req, res) {
