@@ -85,8 +85,7 @@ module.exports.homelist = function(req, res) {
   };
 };
 
-/* GET 'Location info' page */
-module.exports.locationInfo = function(req, res) {
+var getLocationInfo = function(req, res, callback) {
   var requestOptions, path;
   // Get locationid paramater from URL and append it to API path
   path = "/api/locations/" + req.params.locationid;
@@ -109,14 +108,28 @@ module.exports.locationInfo = function(req, res) {
           lat : body.coords[1]
         };
           // Call renderDetailPage function when API has responded
-          renderDetailPage(req, res, data);
+          callback(req, res, data);
       } else {
         // if check wasn't successful, pass error through to _showError function
         _showError(req, res, response.statusCode);
       }
     }
   );
+}
+
+/* GET 'Location info' page */
+module.exports.locationInfo = function(req, res) {
+  getLocationInfo(req, res, function(req, res, responseData) {
+    renderDetailPage(req, res, responseData);
+  });
 };
+
+/* GET 'Add review' page */
+module.exports.addReview = function(req, res) {
+  getLocationInfo(req, res, function(req, res, responseData) {
+    renderReviewForm(req, res, responseData);
+  });
+}
 
 var _showError = function(req, res, status) {
   var title, content;
@@ -148,17 +161,13 @@ var renderDetailPage = function(req, res, locDetail) {
   });
 };
 
-var renderReviewForm = function(req, res) {
+var renderReviewForm = function(req, res, locDetail) {
   res.render('location-review-form', {
-     title: 'Review Oppenheimer Cafe on Loc8r',
-     pageHeader: { title: 'Review Oppenheimer Cafe'}
+     title: 'Review ' + locDetail.name + 'on Loc8r',
+     pageHeader: { title: 'Review ' + locDetail.name}
    });
 };
 
-/* GET 'Add review' page */
-module.exports.addReview = function(req, res) {
-  renderReviewForm(req, res);
-};
 
 module.exports.doAddReview = function(req, res) {
 };
