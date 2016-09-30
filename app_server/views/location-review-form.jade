@@ -8,7 +8,7 @@ block content
     .col-xs-12.col-md-6
       // when form is submitted, it will make a POST request to
       // URL of current page
-      form.form-horizontal(action="", method="post", role="form")
+      form#addReview.form-horizontal(action="", method="post", role="form")
         - if (error == "val") 
           .alert.alert-danger(role="alert") All fields required, please try again
         .form-group
