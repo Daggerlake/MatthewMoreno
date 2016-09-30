@@ -49,7 +49,7 @@ module.exports.homelist = function(req, res) {
     qs : {
       lng : -122.478645,
       lat : 47.260440,
-      dmax : 1,
+      dmax : 10000,
     }
   };
   request(
