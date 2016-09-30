@@ -43,10 +43,30 @@ module.exports.homelist = function(req, res) {
   request(
     requestOptions,
     function(err, response, body) {
-      // pass body returned by request to renderHomepage
-      renderHomepage(req, res, body);
+      var i, data;
+      data = body;
+      // loop through array, formatting distance value of location
+      for (i=0; i<data.length; i++) {
+        data[i].distance = _formatDistance(data[i].distance);
+      }
+      // pass modified data returned by request to renderHomepage
+      renderHomepage(req, res, data);
     }
   );
+
+  var _formatDistance = function (distance) {
+    var numDistance, unit;
+    // if greater than 1,000m, display as km with one decimal unit
+    if (distance >= 1000) {
+      numDistance = parseFloat(distance / 1000).toFixed(1);
+      unit = 'km';
+    // otherwise, display as meters with no decimal units
+    } else {
+      numDistance = parseInt(distance);
+      unit = 'm';
+    }
+    return numDistance + unit;
+  };
 };
 
 /* GET 'Location info' page */
