@@ -26,7 +26,7 @@ module.exports.locationsListByDistance = function(req, res) {
 
   // check lng, lat, dmax query parameters exist in correct format
   // otherwise, return 404 error
-  if (!lng || !lat) {
+  if (!lng && lng!==0|| !lat && lat!==0) {
     sendJsonResponse(res, 404, {
       "message": "lng, lat, and dmax query parameters are required"
     });
