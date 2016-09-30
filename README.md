@@ -5,6 +5,9 @@ The live version of the app can be accessed [here]( https://glacial-beach-72033.
 
 ## Notes
 * The path in the title of Listing 6.1 is incorrect; the correct path should read `app_api/routes/index.js`.
+* The location that I used to test posting was Metronome Cafe.
+  * **lat**: 47.255039
+  * **long**: -122.48330
 
 # Chapter 5
 ## Live version
