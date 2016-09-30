@@ -66,7 +66,8 @@ block content
                       span.rating
                         +outputRating(review.rating)
                       span.author #{review.author}
-                      small.reviewTimestamp #{review.createdOn}
+                      small.reviewTimestamp 
+                        +formatDate(review.createdOn)
                     .col-xs-12
                       // replace line breaks in text with <br/> tag
                       p !{(review.reviewText).replace(/\n/g, '<br/>')}
