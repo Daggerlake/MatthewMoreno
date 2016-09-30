@@ -1,3 +1,12 @@
+# Chapter 7
+## Live version
+The live version of the app can be accessed [here]( https://glacial-beach-72033.herokuapp.com/). Below is a screenshot of the project in the wild.
+![Chapter 7 screenshot](/public/images/chapter_7_screenshot.png)
+
+## Notes
+* Distances greater than 1,000 m were rendered in km to one decimal digit of precision.
+* Distances less than 1,000 m were rendered in m as an integer.
+
 # Chapter 6
 ## Live version
 The live version of the app can be accessed [here]( https://glacial-beach-72033.herokuapp.com/). Below is a screenshot of the project in the wild.
