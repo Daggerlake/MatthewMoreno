@@ -10,6 +10,17 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 var renderHomepage = function(req, res, responseBody) {
+  var message;
+  if (!(responseBody instanceof Array)) {
+    // if response isn't array, set responseBody to be empty array
+    message = "API lookup error";
+    responseBody = [];
+  } else {
+    // if response if array with no length
+    if (!responseBody.length) {
+      message = "No places found nearby";
+    }
+  }
   res.render('locations-list', {
     title: 'Loc8r - find a place to work with wifi',
     pageHeader: {
@@ -18,7 +29,8 @@ var renderHomepage = function(req, res, responseBody) {
     },
     sidebar: "Looking for wifi and a seat? Loc8r helps you find places to work when out and about. Perhaps with coffee, cake, or a pint? Let Loc8r help you find the place you're looking for.",
     // information from our request API
-    locations: responseBody
+    locations: responseBody,
+    message: message
   });
 };
 
@@ -37,7 +49,7 @@ module.exports.homelist = function(req, res) {
     qs : {
       lng : -122.478645,
       lat : 47.260440,
-      dmax : 10000
+      dmax : 1,
     }
   };
   request(
@@ -45,9 +57,13 @@ module.exports.homelist = function(req, res) {
     function(err, response, body) {
       var i, data;
       data = body;
-      // loop through array, formatting distance value of location
-      for (i=0; i<data.length; i++) {
-        data[i].distance = _formatDistance(data[i].distance);
+      // only run the loop to format distances if API retuned
+      // 200 status code and some data
+      if (response.statusCode === 200 && data.length) {
+        // loop through array, formatting distance value of location
+        for (i=0; i<data.length; i++) {
+          data[i].distance = _formatDistance(data[i].distance);
+        }
       }
       // pass modified data returned by request to renderHomepage
       renderHomepage(req, res, data);
