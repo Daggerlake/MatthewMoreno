@@ -89,13 +89,13 @@ module.exports.homelist = function(req, res) {
 module.exports.locationInfo = function(req, res) {
   var requestOptions, path;
   // Get locationid paramater from URL and append it to API path
-  path = "/api/locations" + req.params.locationid;
+  path = "/api/locations/" + req.params.locationid;
 
   // Set all request options needed to call API
   requestOptions = {
     url : apiOptions.server + path,
     method : "GET",
-    jsoin : {}
+    json : {}
   };
 
   request(
