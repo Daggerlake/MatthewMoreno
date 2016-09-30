@@ -87,7 +87,24 @@ module.exports.homelist = function(req, res) {
 
 /* GET 'Location info' page */
 module.exports.locationInfo = function(req, res) {
-  renderDetailPage(req, res);
+  var requestOptions, path;
+  // Get locationid paramater from URL and append it to API path
+  path = "/api/locations" + req.params.locationid;
+
+  // Set all request options needed to call API
+  requestOptions = {
+    url : apiOptions.server + path,
+    method : "GET",
+    jsoin : {}
+  };
+
+  request(
+    requestOptions,
+    function(err, response, body) {
+      // Call renderDetailPage function when API has responded
+      renderDetailPage(req, res);
+    }
+  );
 };
 
 var renderDetailPage = function(req, res) {
