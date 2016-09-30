@@ -102,16 +102,38 @@ module.exports.locationInfo = function(req, res) {
     requestOptions,
     function(err, response, body) {
       var data = body;
-      console.log(body)
-      data.coords = {
-        lng : body.coords[0],
-        lat : body.coords[1]
-      };
-
-      // Call renderDetailPage function when API has responded
-      renderDetailPage(req, res, data);
+      // check for successful response from API
+      if (response.statusCode === 200) {
+        data.coords = {
+          lng : body.coords[0],
+          lat : body.coords[1]
+        };
+          // Call renderDetailPage function when API has responded
+          renderDetailPage(req, res, data);
+      } else {
+        // if check wasn't successful, pass error through to _showError function
+        _showError(req, res, response.statusCode);
+      }
     }
   );
+};
+
+var _showError = function(req, res, status) {
+  var title, content;
+  if (status === 404) {
+    title = "404, page not found";
+    content = "Oh dear. Looks like we can't find this page. Sorry!";
+  } else {
+    title = status + ", something's gone wront";
+    content = "Something, somewhere has gone just a little bit wrong.";
+  }
+  // set response status
+  res.status(status);
+  // send data to view
+  res.render('generic-text', {
+    title : title,
+    content : content
+  });
 };
 
 var renderDetailPage = function(req, res, locDetail) {
