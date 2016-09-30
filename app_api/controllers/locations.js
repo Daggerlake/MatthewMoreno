@@ -38,7 +38,7 @@ module.exports.locationsListByDistance = function(req, res) {
     var locations = [];
     // if geoNear query returns error, send as response with 404 status
     if(err) {
-      sensJsonResponse(res, 404, err);
+      sendJsonResponse(res, 404, err);
     } else {
 
       // process the data and then push it into the return object
