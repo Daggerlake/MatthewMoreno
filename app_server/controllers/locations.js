@@ -155,3 +155,6 @@ module.exports.addReview = function(req, res) {
      pageHeader: { title: 'Review Oppenheimer Cafe'}
    });
 };
+
+module.exports.doAddReview = function(req, res) {
+};
