@@ -9,8 +9,7 @@ if (process.env.NODE_ENV === 'production') {
   apiOptions.server = "https://glacial-beach-72033.herokuapp.com/";
 }
 
-/* GET 'home' page */
-module.exports.homelist = function(req, res) {
+var renderHomepage = function(req, res) {
   res.render('locations-list', {
     title: 'Loc8r - find a place to work with wifi',
     pageHeader: {
@@ -38,6 +37,11 @@ module.exports.homelist = function(req, res) {
       distance: '250m'
     }]
   });
+};
+
+/* GET 'home' page */
+module.exports.homelist = function(req, res) {
+  renderHomepage(req, res);
 };
 
 /* GET 'Location info' page */
