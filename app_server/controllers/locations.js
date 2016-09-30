@@ -1,3 +1,14 @@
+var request = require('request');
+var apiOptions = {
+  // set default server URL for local development
+  server: "http://localhost:3000"
+};
+if (process.env.NODE_ENV === 'production') {
+  // if application is running in production mode set different base URL;
+  // change to be live address of application
+  apiOptions.server = "https://glacial-beach-72033.herokuapp.com/";
+}
+
 /* GET 'home' page */
 module.exports.homelist = function(req, res) {
   res.render('locations-list', {
@@ -77,6 +88,6 @@ module.exports.locationInfo = function(req, res) {
 module.exports.addReview = function(req, res) {
   res.render('location-review-form', {
      title: 'Review Oppenheimer Cafe on Loc8r',
-     pageHeader: { title: 'Review Oppenheimer Cafe'} 
+     pageHeader: { title: 'Review Oppenheimer Cafe'}
    });
 };
