@@ -158,7 +158,57 @@ module.exports.reviewsReadOne = function(req, res) {
   }
 };
 module.exports.reviewsUpdateOne = function(req, res) {
-  sendJsonResponse(res, 200, {"status" : "success"});
+  if(!req.params.locationid || !req.params.reviewid) {
+    sendJsonResponse(res, 404, {
+      "message": "Not found, locationid and reviewid are both required"
+    });
+    console.log("reviewsUpdateOne locationid and reviewid are both required");
+    return;
+  }
+  // find parent document
+  Loc
+    .findById(req.params.locationid)
+    .select('reviews')
+    .exec(
+      function(err, location) {
+        var thisReview;
+        if(!location) {
+          sendJsonResponse(res, 404, {
+            "message": "locationid not found"
+          });
+          return;
+        }
+        if (location.reviews && location.reviews.length > 0) {
+          // find subdocument
+          thisReview = location.reviews.id(req.params.reviewid);
+          if (!thisReview) {
+            sendJsonResponse(res, 404, {
+              "message": "reviewid not found"
+            });
+          } else {
+            // make changes to subdocument from supplied form data
+            thisReview.author = req.body.author;
+            thisReview.rating = req.body.rating;
+            thisReview.reviewText = req.body.reviewText;
+            location.save(function(err, location) {
+              // return a JSON response, sending subdocument object
+              // depending on whether save was successful
+              if (err) {
+                sendJsonResponse(res, 404, err);
+              } else {
+                updateAverageRating(location._id);
+                sendJsonResponse(res, 200, thisReview);
+              }
+            });
+          }
+        } else {
+          sendJsonResponse(res, 404, {
+            "message": "No review to update"
+          });
+          console.log("reviewsUpdateOne no review to update");
+        }
+      }
+    );
 };
 module.exports.reviewsDeleteOne = function(req, res) {
   sendJsonResponse(res, 200, {"status" : "success"});
