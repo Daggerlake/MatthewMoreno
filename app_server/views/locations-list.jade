@@ -26,7 +26,7 @@ block content
         each location in locations
           .col-xs-12.list_group_item
             h4
-              a(href="/location")= location.name
+              a(href="/location/#{location._id}")= location.name
               small &nbsp;
                 +outputRating(location.rating)
               // Distance to location
