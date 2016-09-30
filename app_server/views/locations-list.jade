@@ -14,13 +14,13 @@ block content
           small &nbsp;#{pageHeader.strapline}
           // #{} delimiters are used to insert data into a specific place
   .row
-    each location in locations
-      // Container for list of locations, spanning all twelve columns on
-      // extra-small devices and eight columns on small devices and larger
-      .col-xs-12.col-sm-8
-        // Set up a Bootstrap list group and create a single item spanning full
-        // twelve columns
-        .row.list_group
+    // Container for list of locations, spanning all twelve columns on
+    // extra-small devices and eight columns on small devices and larger
+    .col-xs-12.col-sm-8
+      // Set up a Bootstrap list group and create a single item spanning full
+      // twelve columns
+      .row.list_group
+        each location in locations
           .col-xs-12.list_group_item
             h4
               a(href="/location")= location.name
