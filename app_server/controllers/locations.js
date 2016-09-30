@@ -87,6 +87,10 @@ module.exports.homelist = function(req, res) {
 
 /* GET 'Location info' page */
 module.exports.locationInfo = function(req, res) {
+  renderDetailPage(req, res);
+};
+
+var renderDetailPage = function(req, res) {
   res.render('location-info', {
     title: 'Oppenheimer Cafe',
     pageHeader: {title: 'Oppenheimer Cafe'},
