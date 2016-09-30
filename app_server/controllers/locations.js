@@ -101,52 +101,28 @@ module.exports.locationInfo = function(req, res) {
   request(
     requestOptions,
     function(err, response, body) {
+      var data = body;
+      console.log(body)
+      data.coords = {
+        lng : body.coords[0],
+        lat : body.coords[1]
+      };
+
       // Call renderDetailPage function when API has responded
-      renderDetailPage(req, res);
+      renderDetailPage(req, res, data);
     }
   );
 };
 
-var renderDetailPage = function(req, res) {
+var renderDetailPage = function(req, res, locDetail) {
   res.render('location-info', {
-    title: 'Oppenheimer Cafe',
-    pageHeader: {title: 'Oppenheimer Cafe'},
+    title: locDetail.name,
+    pageHeader: {title: locDetail.name},
     sidebar: {
       context: 'is on Loc8r because it has accessible wifi and space to sit down with your laptop and do some work.',
       callToAction: 'If you\'ve been and you like it - or you don\'t - please leave a review to help other people just like you.'
     },
-    location: {
-      name: 'Oppenheimer Cafe',
-      address: '125 High Street, Reading, RG6 1PS',
-      rating: 3,
-      facilities: ['Hot drinks', 'Food', 'Premium wifi'],
-      coords: {lat: 47.263599, lng: -122.483337},
-      openingTimes: [{
-        days: 'Monday - Friday',
-        opening: '7:00am',
-        closing: '7:00pm',
-        closed: false
-      },{
-        days: 'Saturday',
-        opening: '8:00am',
-        closing: '7:00pm',
-        closed: false
-      },{
-        days: 'Sunday',
-        closed: true
-      }],
-      reviews: [{
-        author: 'Simon Holmes',
-        rating: 5,
-        timestamp: '16 July 2013',
-        reviewText: 'what a great place. I can\'t say enough good things about it.'
-      },{
-        author: 'The Grizz',
-        rating: 3,
-        timestamp: '16 June 2013',
-        reviewText: 'Meh. The coffee was expensive but hack, hack, chop, chop!'
-      }]
-    }
+    location: locDetail
   });
 };
 
