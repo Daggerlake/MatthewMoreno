@@ -6,7 +6,7 @@ var apiOptions = {
 if (process.env.NODE_ENV === 'production') {
   // if application is running in production mode set different base URL;
   // change to be live address of application
-  apiOptions.server = "https://glacial-beach-72033.herokuapp.com/";
+  apiOptions.server = "https://glacial-beach-72033.herokuapp.com";
 }
 
 var renderHomepage = function(req, res, responseBody) {
