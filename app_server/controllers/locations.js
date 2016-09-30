@@ -188,24 +188,30 @@ module.exports.doAddReview = function(req, res) {
     method : "POST",
     json : postdata
   }
-  // make the request
-  request(
-    requestOptions,
-    function(err, response, body) {
-      // redirect to Details page if review was added successfully ...
-      if (response.statusCode === 201) {
-        res.redirect('/location/' + locationid);
+
+  // check that no required data fields are falsey
+  if (!postdata.author || !postdata.rating || !postdata.reviewText) {
+    res.redirect('/location/' + locationid + '/review/new?err=val');
+  } else {
+    // make the request
+    request(
+      requestOptions,
+      function(err, response, body) {
+        // redirect to Details page if review was added successfully ...
+        if (response.statusCode === 201) {
+          res.redirect('/location/' + locationid);
+        }
+        // check to see if status is 400, if body has name, and if that name
+        // is ValidationError
+        else if (response.statusCode === 400 && body.name && body.name === "ValidationError") {
+          // redirect to review form, passing an error flag in query string
+          res.redirect('/location/' + locationid + '/review/new?err=val');
+        }
+        // ... or show an error page if API returned an error
+        else {
+          _showError(req, res, response.statusCode);
+        }
       }
-      // check to see if status is 400, if body has name, and if that name
-      // is ValidationError
-      else if (response.statusCode === 400 && body.name && body.name === "ValidationError") {
-        // redirect to review form, passing an error flag in query string
-        res.redirect('/location/' + locationid + '/review/new?err=val');
-      }
-      // ... or show an error page if API returned an error
-      else {
-        _showError(req, res, response.statusCode);
-      }
-    }
-  );
+    );
+  }
 };
