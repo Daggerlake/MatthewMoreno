@@ -6,8 +6,9 @@ block content
       h1= pageHeader.title
   .row
     .col-xs-12.col-md-6
-      // set form action to /location and method to get
-      form.form-horizontal(action="/location", method="get", role="form")
+      // when form is submitted, it will make a POST request to
+      // URL of current page
+      form.form-horizontal(action="", method="post", role="form")
         .form-group
           // input field for reviewer to leave name
           label.col-xs-10.col-sm-2.control-label(for="name") Name
