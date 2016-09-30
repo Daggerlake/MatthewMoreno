@@ -170,4 +170,35 @@ var renderReviewForm = function(req, res, locDetail) {
 
 
 module.exports.doAddReview = function(req, res) {
+  var requestOptions, path, locationid, postdata;
+  // get location ID from URL to construct API URL
+  locationid = req.params.locationid;
+  path = "/api/locations/" + locationid + '/reviews';
+  // Create data object to send to API using submitted form data
+  postdata = {
+    author: req.body.name,
+    rating: parseInt(req.body.rating, 10),
+    reviewText: req.body.review
+  };
+  // Set request options, including path, setting POST method and passing
+  // submitted form data into json parameter
+  requestOptions = {
+    url : apiOptions.server + path,
+    method : "POST",
+    json : postdata
+  }
+  // make the request
+  request(
+    requestOptions,
+    function(err, response, body) {
+      // redirect to Details page if review was added successfully ...
+      if (response.statusCode === 201) {
+        res.redirect('/location/' + locationid);
+      }
+      // ... or show an error page if API returned an error
+      else {
+        _showError(req, res, response.statusCode);
+      }
+    }
+  );
 };
