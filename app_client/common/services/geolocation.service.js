@@ -3,7 +3,7 @@ angular
   .service('geolocation', geolocation);
   
 // create geolocation service
-var geolocation = function () {
+function geolocation () {
   // Define function called getPosition that accepts three callback functions
   // for success, error, and not supported
   var getPosition = function (cbSuccess, cbError, cbNoGeo) {
@@ -22,4 +22,4 @@ var geolocation = function () {
     // return getPosition function so it can be invoked from controller
     getPosition : getPosition
   };
-};
+}
