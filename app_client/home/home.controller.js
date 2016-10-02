@@ -4,6 +4,8 @@ angular
   .module('loc8rApp')
   .controller('homeCtrl', homeCtrl);
 
+// inject dependencies to protect against minification
+homeCtrl.$inject = ['$scope', 'loc8rData', 'geolocation'];
 // Define new controller homeCtrl
 // and bind some data for page header and sidebar
 function homeCtrl ($scope, loc8rData, geolocation) {
