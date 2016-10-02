@@ -8,7 +8,7 @@ require('./app_api/models/db');
 var uglifyJs = require("uglify-js");
 var fs = require('fs');
 
-var routes = require('./app_server/routes/index');
+//var routes = require('./app_server/routes/index');
 var routesApi = require('./app_api/routes/index');
 var users = require('./app_server/routes/users');
 
@@ -48,9 +48,14 @@ app.use('/bower_components',  express.static(path.join(__dirname , 'bower_compon
 app.use(express.static(path.join(__dirname, 'app_client')));
 
 
-app.use('/', routes);
+//app.use('/', routes);
 app.use('/api', routesApi);
 app.use('/users', users);
+// Add catchall app.use function to respond to any requests
+// that make it this far by sending HTML file
+app.use(function(req, res) {
+  res.sendfile(path.join(__dirname, 'app_client', 'index.html'));
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
