@@ -1,23 +1,9 @@
 angular.module('loc8rApp', []);
 
 // Angular controller code, accepting $scope parameter
-var locationListCtrl = function ($scope) {
-  $scope.data = {
-    locations : [{
-      name: 'Burger Queen',
-      address: '125 High Street, Reading, RG6 1PS',
-      rating: 3,
-      facilities: ['Hot drinks', 'Food', 'Premium wifi'],
-      distance: '29.6456',
-      _id: '5370a35f2536f6785f8dfb6a'
-    },{
-      name: 'Costy',
-      address: '125 High Street, Reading, RG6 1PS',
-      rating: 5,
-      facilities: ['Hot drinks', 'Food', 'Alcoholic drinks'],
-      distance: '78.65456',
-      _id: '5370a35f2536f6785f8dfb6a'
-  }]};
+// pass service name into controller function as a parameter
+var locationListCtrl = function ($scope, loc8rData) {
+  $scope.data = { locations : loc8rData };
 };
 
 var _isNumeric = function (n) {
@@ -59,9 +45,27 @@ var ratingStars = function () {
   };
 };
 
+var loc8rData = function () {
+  return [{
+      name: 'Burger Queen',
+      address: '125 High Street, Reading, RG6 1PS',
+      rating: 3,
+      facilities: ['Hot drinks', 'Food', 'Premium wifi'],
+      distance: '29.6456',
+      _id: '5370a35f2536f6785f8dfb6a'
+    },{
+      name: 'Costy',
+      address: '125 High Street, Reading, RG6 1PS',
+      rating: 5,
+      facilities: ['Hot drinks', 'Food', 'Alcoholic drinks'],
+      distance: '78.65456',
+      _id: '5370a35f2536f6785f8dfb6a'
+  }];
+};
 
 angular
   .module('loc8rApp')
   .controller('locationListCtrl', locationListCtrl)
   .filter('formatDistance', formatDistance)
-  .directive('ratingStars', ratingStars);
+  .directive('ratingStars', ratingStars)
+  .service('loc8rData', loc8rData);
