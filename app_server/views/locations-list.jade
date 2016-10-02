@@ -18,6 +18,10 @@ block content
     // extra-small devices and eight columns on small devices and larger
     // Define Angular controller on central column div
     .col-xs-12.col-sm-8(ng-controller="locationListCtrl")
+      label(for="filter") Filter results
+      &nbsp;
+      // create an input field and bind it to model with the name textFilter
+      input#filter(type="text", name="filter", ng-model="textFilter")
       // Add a div into main content area and have it display message if one
       // is sent
       .error {{ message }}
@@ -25,7 +29,7 @@ block content
       // twelve columns
       .row.list_group
         // start ng-repeat for each item in locations array in $scope.data
-        .col-xs-12.list_group_item(ng-repeat="location in data.locations")
+        .col-xs-12.list_group_item(ng-repeat="location in data.locations | filter : textFilter")
           h4
             a(href="/location/{{ location._id }}") {{ location.name }}
             &nbsp;
