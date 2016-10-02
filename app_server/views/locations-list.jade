@@ -28,7 +28,8 @@ block content
         .col-xs-12.list_group_item(ng-repeat="location in data.locations")
           h4
             a(href="/location/{{ location._id }}") {{ location.name }}
-            small {{ location.rating }}
+            &nbsp;
+            small(rating-stars, rating="location.rating")
             // Distance to location
             span.badge.pull-right.badge-default {{ location.distance | formatDistance }}
           // Address of locaiton

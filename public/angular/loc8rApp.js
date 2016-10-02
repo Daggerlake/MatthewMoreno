@@ -46,8 +46,22 @@ var formatDistance = function () {
   };
 };
 
+var ratingStars = function () {
+  return {
+      // Add scope option to directive definition to isolate scope
+      scope : {
+        // Create new variable thisRating and tell Angular
+        // to get value from attribute called rating
+        thisRating : '=rating'
+      },
+      // Update template to use new variable
+      templateUrl : '/angular/rating-stars.html'
+  };
+};
+
 
 angular
   .module('loc8rApp')
   .controller('locationListCtrl', locationListCtrl)
-  .filter('formatDistance', formatDistance);
+  .filter('formatDistance', formatDistance)
+  .directive('ratingStars', ratingStars);
