@@ -2,7 +2,7 @@
 $('#addReview').submit(function (e) {
   $('.alert.alert-danger').hide();
   // check for any missing values
-  if (!$('input#name').val() || :$('select#rating').val() || !$('textarea#review').val()) {
+  if (!$('input#name').val() || !$('select#rating').val() || !$('textarea#review').val()) {
     // show or inject error message onto page if value is missing
     if ($('.alert.alert-danger').length) {
       $('alert.alert-danger').show();
