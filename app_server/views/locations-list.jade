@@ -30,7 +30,7 @@ block content
             a(href="/location/{{ location._id }}") {{ location.name }}
             small {{ location.rating }}
             // Distance to location
-            span.badge.pull-right.badge-default {{ location.distance }}
+            span.badge.pull-right.badge-default {{ location.distance | formatDistance }}
           // Address of locaiton
           p.address {{ location.address }}
           p
