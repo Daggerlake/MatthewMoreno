@@ -16,28 +16,28 @@ block content
   .row
     // Container for list of locations, spanning all twelve columns on
     // extra-small devices and eight columns on small devices and larger
-    .col-xs-12.col-sm-8
+    // Define Angular controller on central column div
+    .col-xs-12.col-sm-8(ng-controller="locationListCtrl")
       // Add a div into main content area and have it display message if one
       // is sent
-      .error= message
+      .error {{ message }}
       // Set up a Bootstrap list group and create a single item spanning full
       // twelve columns
       .row.list_group
-        each location in locations
-          .col-xs-12.list_group_item
-            h4
-              a(href="/location/#{location._id}")= location.name
-              small &nbsp;
-                +outputRating(location.rating)
-              // Distance to location
-              span.badge.pull-right.badge-default= location.distance
-            // Address of locaiton
-            p.address= location.address
-            p
-              // Location facilities
-              each facility in location.facilities
-                span.label.label-warning= facility
-                &nbsp;
+        // start ng-repeat for each item in locations array in $scope.data
+        .col-xs-12.list_group_item(ng-repeat="location in data.locations")
+          h4
+            a(href="/location/{{ location._id }}") {{ location.name }}
+            small {{ location.rating }}
+            // Distance to location
+            span.badge.pull-right.badge-default {{ location.distance }}
+          // Address of locaiton
+          p.address {{ location.address }}
+          p
+            // Location facilities
+            // add nested ng-repeat loop to output facilities for each location
+              span.label.label-warning.label-facility(ng-repeat="facility in location.facilities")
+              | {{ facility }}
     // Container for secondary or sidebar information, spanning all twelve
     // columns on extra-small devices and four columns on small devices and
     // larger

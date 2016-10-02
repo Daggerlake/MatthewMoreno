@@ -10,17 +10,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 var renderHomepage = function(req, res, responseBody) {
-  var message;
-  if (!(responseBody instanceof Array)) {
-    // if response isn't array, set responseBody to be empty array
-    message = "API lookup error";
-    responseBody = [];
-  } else {
-    // if response if array with no length
-    if (!responseBody.length) {
-      message = "No places found nearby";
-    }
-  }
   res.render('locations-list', {
     title: 'Loc8r - find a place to work with wifi',
     pageHeader: {
@@ -29,60 +18,12 @@ var renderHomepage = function(req, res, responseBody) {
     },
     sidebar: "Looking for wifi and a seat? Loc8r helps you find places to work when out and about. Perhaps with coffee, cake, or a pint? Let Loc8r help you find the place you're looking for.",
     // information from our request API
-    locations: responseBody,
-    message: message
   });
 };
 
 /* GET 'home' page */
 module.exports.homelist = function(req, res) {
-  // set path for API request
-  var requestOptions, path;
-  path = '/api/locations';
-  // set request options, including URL, method, empty JSON body,
-  // and query string paramaters
-  requestOptions = {
-    url : apiOptions.server + path,
-    method : "GET",
-    json : {},
-    // query paramaters
-    qs : {
-      lng : -122.478645,
-      lat : 47.260440,
-      dmax : 10000,
-    }
-  };
-  request(
-    requestOptions,
-    function(err, response, body) {
-      var i, data;
-      data = body;
-      // only run the loop to format distances if API retuned
-      // 200 status code and some data
-      if (response.statusCode === 200 && data.length) {
-        // loop through array, formatting distance value of location
-        for (i=0; i<data.length; i++) {
-          data[i].distance = _formatDistance(data[i].distance);
-        }
-      }
-      // pass modified data returned by request to renderHomepage
-      renderHomepage(req, res, data);
-    }
-  );
-
-  var _formatDistance = function (distance) {
-    var numDistance, unit;
-    // if greater than 1,000m, display as km with one decimal unit
-    if (distance >= 1000) {
-      numDistance = parseFloat(distance / 1000).toFixed(1);
-      unit = 'km';
-    // otherwise, display as meters with no decimal units
-    } else {
-      numDistance = parseInt(distance);
-      unit = 'm';
-    }
-    return numDistance + unit;
-  };
+  renderHomepage(req, res);
 };
 
 var getLocationInfo = function(req, res, callback) {
