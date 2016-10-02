@@ -1,3 +1,7 @@
+angular
+  .module('loc8rApp')
+  .service('loc8rData', loc8rData);
+
 // pass $http service into existing service function
 var loc8rData = function ($http) {
   var locationByCoords = function(lat, lng) {
