@@ -4,7 +4,8 @@ The live version of the app can be accessed [here]( https://glacial-beach-72033.
 ![Chapter 8 screenshot](/public/images/chapter_8_screenshot.png)
 
 ## Notes
-
+* Instead of downloading a copy of Angular, I added it as a Bower dependency. Like with jquery in Chapter 1, I include Angular in layout.jade by using ```script(src='/bower_components/angular/angular.min.js')
+```.
 
 # Chapter 7
 ## Live version
