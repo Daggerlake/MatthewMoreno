@@ -1,3 +1,7 @@
+angular
+  .module('loc8rApp')
+  .service('geolocation', geolocation);
+  
 // create geolocation service
 var geolocation = function () {
   // Define function called getPosition that accepts three callback functions
