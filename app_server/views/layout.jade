@@ -25,7 +25,8 @@ html(ng-app='loc8rApp')
     // prevent the content from filling the entire width of the screen
     // stuff in the container is still left-aligned
     .container
-      block content
+      div(ng-view)
+        block content
       footer
         .row
           .col-xs-12
