@@ -1,7 +1,8 @@
+(function() {
 angular
   .module('loc8rApp')
   .service('geolocation', geolocation);
-  
+
 // create geolocation service
 function geolocation () {
   // Define function called getPosition that accepts three callback functions
@@ -23,3 +24,4 @@ function geolocation () {
     getPosition : getPosition
   };
 }
+}) ();

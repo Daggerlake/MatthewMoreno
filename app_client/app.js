@@ -1,4 +1,6 @@
 //Add ngRoute as a dependency
+(function () {
+
 angular.module('loc8rApp', ['ngRoute']);
 
 // Model config function to hold route definitions
@@ -16,3 +18,4 @@ function config ($routeProvider) {
 angular
   .module('loc8rApp')
   .config(['$routeProvider', config]);
+}) ();
