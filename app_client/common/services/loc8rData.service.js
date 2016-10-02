@@ -3,7 +3,7 @@ angular
   .service('loc8rData', loc8rData);
 
 // pass $http service into existing service function
-var loc8rData = function ($http) {
+function loc8rData ($http) {
   var locationByCoords = function(lat, lng) {
     return $http.get('/api/locations?lng=' + lng + '&lat=' + lat + '&dmax=10000');
   };
@@ -12,4 +12,4 @@ var loc8rData = function ($http) {
     // making it accessible as method of service
     locationByCoords : locationByCoords
   };
-};
+}
