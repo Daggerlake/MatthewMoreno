@@ -3,17 +3,27 @@ angular.module('loc8rApp', []);
 // Angular controller code, accepting $scope parameter
 // pass service name into controller function as a parameter
 var locationListCtrl = function ($scope, loc8rData) {
+  // set default message letting user know that
+  // data is being retrieved in the background
+  $scope.message = "searching for nearby places...";
   // invoke loc8rDAta service, which returns $http.get call
   loc8rData
     .success(function(data) {
       // on successful response, pass returned data into callback function
       // apply this data to scope
+      // if request returns successfully and there's some data,
+      // clear the message
+      //otherwise, let user know that nothing was found
+      $scope.message = data.length > 0 ? "" : "No locations found";
       $scope.data = { locations : data };
     })
     .error(function (e) {
       // if web service returned error,
       // pass error to callback function
       console.log(e);
+      // if asynchronous call returns an error,
+      // let the user know something is wrong
+      $scope.message = "Sorry, something's gone wrong";
     });
 };
 
