@@ -4,8 +4,7 @@ The live version of the app can be accessed [here]( https://glacial-beach-72033.
 ![Chapter 8 screenshot](/public/images/chapter_8_screenshot.png)
 
 ## Notes
-* Instead of downloading a copy of Angular, I added it as a Bower dependency. Like with jquery in Chapter 1, I include Angular in layout.jade by using ```script(src='/bower_components/angular/angular.min.js')
-```.
+* Instead of downloading a copy of Angular, I added it as a Bower dependency. Like with jquery in Chapter 1, I include Angular in layout.jade by using ```script(src='/bower_components/angular/angular.min.js')```.
 * To make bower dependencies install on Heroku, I had to add `"postinstall": "./node_modules/bower/bin/bower install"` to the scripts block in `package.json`.
 
 # Chapter 7
