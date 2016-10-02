@@ -5,6 +5,7 @@ The live version of the app can be accessed [here]( https://glacial-beach-72033.
 
 ## Notes
 * In order to get the locations to show up on the homepage, I had to replace `vm.data = { locations: data };` with `$scope.data = { locations: data };` in the home list controller.
+* The file `rating-stars.html` is located in `public/angular`, not `public`.
 
 # Chapter 8
 ## Live version
