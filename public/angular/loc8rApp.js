@@ -3,7 +3,18 @@ angular.module('loc8rApp', []);
 // Angular controller code, accepting $scope parameter
 // pass service name into controller function as a parameter
 var locationListCtrl = function ($scope, loc8rData) {
-  $scope.data = { locations : loc8rData };
+  // invoke loc8rDAta service, which returns $http.get call
+  loc8rData
+    .success(function(data) {
+      // on successful response, pass returned data into callback function
+      // apply this data to scope
+      $scope.data = { locations : data };
+    })
+    .error(function (e) {
+      // if web service returned error,
+      // pass error to callback function
+      console.log(e);
+    });
 };
 
 var _isNumeric = function (n) {
@@ -45,22 +56,9 @@ var ratingStars = function () {
   };
 };
 
-var loc8rData = function () {
-  return [{
-      name: 'Burger Queen',
-      address: '125 High Street, Reading, RG6 1PS',
-      rating: 3,
-      facilities: ['Hot drinks', 'Food', 'Premium wifi'],
-      distance: '29.6456',
-      _id: '5370a35f2536f6785f8dfb6a'
-    },{
-      name: 'Costy',
-      address: '125 High Street, Reading, RG6 1PS',
-      rating: 5,
-      facilities: ['Hot drinks', 'Food', 'Alcoholic drinks'],
-      distance: '78.65456',
-      _id: '5370a35f2536f6785f8dfb6a'
-  }];
+// pass $http service into existing service function
+var loc8rData = function ($http) {
+  return $http.get('/api/locations?lng=-122.478256&lat=47.260099&dmax=10000');
 };
 
 angular
