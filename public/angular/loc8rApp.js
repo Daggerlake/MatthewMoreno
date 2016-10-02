@@ -7,11 +7,12 @@ var locationListCtrl = function ($scope, loc8rData, geolocation) {
 
   // function to run if geolocation is successful
   $scope.getData = function(position) {
+    var lat = position.coords.latitude, lng = position.coords.longitude;
     // set default message letting user know that
     // data is being retrieved in the background
     $scope.message = "searching for nearby places...";
     // invoke loc8rDAta service, which returns $http.get call
-    loc8rData
+    loc8rData.locationByCoords(lat, lng)
       .success(function(data) {
         // on successful response, pass returned data into callback function
         // apply this data to scope
@@ -88,7 +89,14 @@ var ratingStars = function () {
 
 // pass $http service into existing service function
 var loc8rData = function ($http) {
-  return $http.get('/api/locations?lng=-122.478256&lat=47.260099&dmax=10000');
+  var locationByCoords = function(lat, lng) {
+    return $http.get('/api/locations?lng=' + lng + '&lat=' + lat + '&dmax=10000');
+  };
+  return {
+    // return locationByCoords function
+    // making it accessible as method of service
+    locationByCoords : locationByCoords
+  };
 };
 
 // create geolocation service
