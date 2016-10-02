@@ -17,6 +17,25 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'app_server', 'views'));
 app.set('view engine', 'jade');
+// step 1: define array of files to uglify
+var appClientFiles = [
+  'app_client/app.js',
+  'app_client/home/home.controller.js',
+  'app_client/common/services/geolocation.service.js',
+  'app_client/common/services/loc8rData.service.js',
+  'app_client/common/filters/formatDistance.filter.js',
+  'app_client/common/directives/ratingStars/ratingStars.directive.js'
+];
+// run uglifyJs.minify process on array of files
+var uglified = uglifyJs.minify(appClientFiles, { compress : false });
+// save generated file
+fs.writeFile('public/angular/loc8r.min.js', uglified.code, function (err) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log('Script generated and saved: loc8r.min.js');
+  }
+});
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
