@@ -52,7 +52,8 @@
             <h2 class="panel-title">Customer reviews</h2>
           </div>
         <div class="panel-body greview-container">
-          <div class="review" ng-repeat="review in vm.data.location.reviews">
+          <!-- order reviews from most recent to least recent -->
+          <div class="review" ng-repeat="review in vm.data.location.reviews | orderBy:'createdOn':true">
             <div class="row">
               <div class="well well-sm review-header">
                 <span class="rating" rating-stars rating="review.rating"></span>
