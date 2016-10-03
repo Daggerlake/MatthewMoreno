@@ -6,8 +6,8 @@
 
   // Inject $routeParams service into controller, protecting against
   // minification
-  locationDetailCtrl.$inject = ['$routeParams', 'loc8rData'];
-  function locationDetailCtrl ($routeParams, loc8rData) {
+  locationDetailCtrl.$inject = ['$routeParams', '$uibModal', 'loc8rData'];
+  function locationDetailCtrl ($routeParams, $uibModal, loc8rData) {
     var vm = this;
     vm.locationid = $routeParams.locationid;
 
