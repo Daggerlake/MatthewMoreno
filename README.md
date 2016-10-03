@@ -5,6 +5,7 @@ The live version of the app can be accessed [here]( https://glacial-beach-72033.
 
 ## Notes
 * Typo on page 317: tag in HTML snippet should be `</p>`, not `/p>`.
+* I installed angular-bootstrap with Bower instead of downloading it manually.
 
 # Chapter 9
 ## Live version
