@@ -1,7 +1,7 @@
 //Add ngRoute as a dependency
 (function () {
 
-angular.module('loc8rApp', ['ngRoute', 'ngSanitize']);
+angular.module('loc8rApp', ['ngRoute', 'ngSanitize', 'ui.bootstrap']);
 
 // Model config function to hold route definitions
 function config ($routeProvider, $locationProvider) {
