@@ -4,7 +4,7 @@
 angular.module('loc8rApp', ['ngRoute']);
 
 // Model config function to hold route definitions
-function config ($routeProvider) {
+function config ($routeProvider, $locationProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'home/home.view.html',
@@ -12,10 +12,12 @@ function config ($routeProvider) {
       controllerAs: 'vm'
     })
     .otherwise({redirectTo: '/'});
+
+  $locationProvider.html5Mode({enabled: true, requireBase: false});
 }
 
 // Add config to module, passing through $routeProvider as a dependency
 angular
   .module('loc8rApp')
-  .config(['$routeProvider', config]);
+  .config(['$routeProvider', '$locationProvider', config]);
 }) ();
