@@ -4,7 +4,7 @@ The live version of the app can be accessed [here]( https://glacial-beach-72033.
 ![Chapter 10 screenshot](/public/images/chapter_10_screenshot.png)
 
 ## Notes
-
+* Typo on page 317: tag in HTML snippet should be `</p>`, not `/p>`.
 
 # Chapter 9
 ## Live version
