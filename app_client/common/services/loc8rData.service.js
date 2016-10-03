@@ -10,10 +10,16 @@ function loc8rData ($http) {
   var locationByCoords = function(lat, lng) {
     return $http.get('/api/locations?lng=' + lng + '&lat=' + lat + '&dmax=10000');
   };
+
+  var locationById = function (locationid) {
+    return $http.get('/api/locations/' + locationid);
+  };
+
   return {
     // return locationByCoords function
     // making it accessible as method of service
-    locationByCoords : locationByCoords
+    locationByCoords : locationByCoords,
+    locationById : locationById
   };
 }
 }) ();
