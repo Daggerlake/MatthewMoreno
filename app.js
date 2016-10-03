@@ -27,6 +27,7 @@ var appClientFiles = [
   'app_client/common/directives/ratingStars/ratingStars.directive.js',
   'app_client/common/directives/footerGeneric/footerGeneric.directive.js',
   'app_client/common/directives/navigation/navigation.directive.js',
+  'app_client/common/directives/pageHeader/pageHeader.directive.js'
 ];
 // run uglifyJs.minify process on array of files
 var uglified = uglifyJs.minify(appClientFiles, { compress : false });
