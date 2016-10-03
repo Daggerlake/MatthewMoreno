@@ -4,10 +4,12 @@
     .module('loc8rApp')
     .controller('reviewModalCtrl', reviewModalCtrl);
 
-  reviewModalCtrl.$inject = ['$uibModalInstance'];
+  reviewModalCtrl.$inject = ['$uibModalInstance', 'locationData'];
 
-  function reviewModalCtrl ($uibModalInstance) {
+  function reviewModalCtrl ($uibModalInstance, locationData) {
     var vm = this;
+
+    vm.locationData = locationData;
 
     vm.modal = {
       cancel : function () {
