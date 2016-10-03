@@ -38,6 +38,12 @@
           }
         }
       });
+      // when modal promise is resolved
+      // push returned data into array of reviews;
+      // Angular binding will do the rest
+      modalInstance.result.then(function (data) {
+        vm.data.location.reviews.push(data);
+      });
     };
   }
 }) ();

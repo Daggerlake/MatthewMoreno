@@ -28,7 +28,9 @@
         reviewText : formData.reviewText
       })
         .success(function (data) {
-          console.log("Success!");
+          // when a new review has been successfully added to database,
+          // send returned data to to modal close helper method
+          vm.modal.close(data);
         })
         .error(function (data) {
           vm.formError = "Your review has not been saved, try again";
@@ -37,6 +39,12 @@
     };
 
     vm.modal = {
+      close : function (result) {
+        //console.log(result);
+        // create helper method to call modal instance close method,
+        // passing through supplied data
+        $uibModalInstance.close(result);
+      },
       cancel : function () {
         $uibModalInstance.dismiss('cancel');
       }
